@@ -1,0 +1,11 @@
+// == Kodingan == \\
+1. instal laravel
+2. membuat Command ResetDataSampel
+   membuat migration dan seeder
+   membaut Command "php artisan app:resetsampel"
+3. membuat middleware admin
+   membuat midleware AdminMiddleware
+   instalasi middleware di controller/karnel.php
+4. membuat route
+4. membuat controller
+5. membuat views
