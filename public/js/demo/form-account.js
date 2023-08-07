@@ -1,19 +1,24 @@
-let role = document.querySelector('select[name="role"]');
+$(document).ready(function () {
+   $('select[name="role"]').on('change', function () {
+      let selectedRole = $(this).val();
+      let ahliElements = $('.user-role-ahli');
+      let judul = $('.title-user-role');
 
+      if (selectedRole === 'ahli') {
+         judul.text("Detail Account Ahli");
+         ahliElements.show();
+      } else {
+         judul.text("Detail Account Petani");
+         ahliElements.hide();
+      }
+   });
 
-role.addEventListener('change', function () {
-   let selectedRole = this.value;
-   let ahliElements = document.querySelectorAll('.user-role-ahli');
-   let judul = document.querySelector('.title-user-role');
-   if (selectedRole === 'ahli') {
-      judul.textContent = "New Account Ahli";
-      ahliElements.forEach(element => {
-         element.style.display = 'block';
-      });
-   } else {
-      judul.textContent = "New Account Petani";
-      ahliElements.forEach(element => {
-         element.style.display = 'none';
-      });
-   }
+   $(".btn-collapse").click(function () {
+      var icon = $(this).find("i");
+      if (icon.hasClass("fa-chevron-down")) {
+         icon.removeClass("fa-chevron-down").addClass("fa-chevron-up");
+      } else {
+         icon.removeClass("fa-chevron-up").addClass("fa-chevron-down");
+      }
+   });
 });

@@ -181,18 +181,24 @@
             <!-- alert  -->
             <div style="position: absolute; z-index:999; right: 0rem; top:5rem;">
                <div class="container-fluid notif-1">
-                  @if(session('success'))
-                  @foreach(session('success') as $key => $message)
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  @if(session('error'))
+                  @foreach(session('error') as $key => $message)
+                  <!-- cek apakah $message dalam bentuk array ap string -->
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                     @if(is_array($message))
+                     <strong>{{$key}} : </strong> {{$message[0]}}
+                     @else
                      <strong>{{$key}} : </strong> {{$message}}
+                     @endif
                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                      </button>
                   </div>
                   @endforeach
                   @endif
-                  @if(session('error'))
-                  @foreach(session('error') as $key => $message)
+
+                  @if(session('success'))
+                  @foreach(session('success') as $key => $message)
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
                      <strong>{{$key}} : </strong> {{$message}}
                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">

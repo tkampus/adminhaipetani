@@ -25,16 +25,14 @@
       </div>
       <div class="card-body">
          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                <thead>
                   <tr>
                      <th>Username</th>
                      <th>Email</th>
                      <th>Role</th>
-                     <th>Telp</th>
-                     <th>NIK</th>
-                     <th>Jenis Kelamin</th>
-                     <th>Alamat</th>
+                     <th>Created At</th>
+                     <th>Action</th>
                   </tr>
                </thead>
                <tfoot>
@@ -42,10 +40,8 @@
                      <th>Username</th>
                      <th>Email</th>
                      <th>Role</th>
-                     <th>Telp</th>
-                     <th>NIK</th>
-                     <th>Jenis Kelamin</th>
-                     <th>Alamat</th>
+                     <th>Created At</th>
+                     <th>Action</th>
                   </tr>
                </tfoot>
                <tbody>
@@ -56,10 +52,15 @@
                      <td>
                         <a href="{{route('read'.$item->role)}}">{{$item->role}}</a>
                      </td>
-                     <td>{{$item->telp}}</td>
-                     <td>{{$item->nik}}</td>
-                     <td>{{$item->jeniskelamin}}</td>
-                     <td>{{$item->alamat}}</td>
+                     <td>{{$item->created_at}}</td>
+                     <td>
+                        <a href="/Detail:{{$item->id}}" class="btn btn-info btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Detail : {{$item->username}}">
+                           <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-circle btn-sm btn-delete" data-id="{{$item->id}}" data-toggle="modal" title="Hapus : {{$item->username}}" data-target="#staticBackdrop" data-toggle="tooltip" data-placement="top" data-username="{{$item->username}}" data-email="{{$item->email}}">
+                           <i class="fas fa-trash"></i>
+                        </a>
+                     </td>
                   </tr>
                   @endforeach
                </tbody>
@@ -70,6 +71,31 @@
 
 </div>
 
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Menghapus Account :</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p>Apakah anda yakin akan menghapus akun <b><span id="usernameToDelete"></span></b>?</p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <form method="post" action="{{Route('deleteakun')}}">
+               @csrf
+               <input class="form-confirm-delete" type="hidden" name="id" value="">
+               <button type="submit" data-id="" class="btn btn-danger">Delete</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
 
 @endsection
 
@@ -77,6 +103,25 @@
 <!-- Page level plugins -->
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- script -->
+<script>
+   $(document).ready(function() {
+      // Tangkap event klik tombol delete
+      $(".btn-delete").on("click", function() {
+         var idToDelete = $(this).data("id"); // Ambil ID item dari data-id
+         var username = $(this).data('username');
+         var email = $(this).data('email');
+
+         // Isi modal dengan informasi detail pengguna
+         $("#staticBackdropLabel").text("Menghapus Account : " + username);
+         $("#usernameToDelete").text(email);
+
+         // Set action untuk tombol delete pada modal
+         $(".form-confirm-delete").attr("value", idToDelete);
+      });
+   });
+</script>
 
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>

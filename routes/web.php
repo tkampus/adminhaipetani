@@ -33,7 +33,16 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/Daftar_Ahli', [akunController::class, 'readahli'])->name('readahli');
     Route::get('/Daftar_Petani', [akunController::class, 'readpetani'])->name('readpetani');
     // delete akun
+    Route::post('/Hapus_Akun', [akunController::class, 'deleteakun'])->name('deleteakun');
     // update akun
+    Route::post('/Update_Akun', function () {
+        return 'hai';
+    })->name('updateakun');
+    Route::post('/Update_Akun', [akunController::class, 'updateakun'])->name('updateakun');
+    // detail akun
+    Route::get('/Detail:{id}', [akunController::class, 'detailakun'])->name('detailakun');
+    // reset pasword akun
+    Route::post('/Reset_Password', [akunController::class, 'gantipasswordakun'])->name('gantipasswordakun');
 
     // read admin
     // delete admin

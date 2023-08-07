@@ -9,6 +9,7 @@ class u_ahli extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'email',
         'telp',
         'nik',
@@ -25,15 +26,19 @@ class u_ahli extends Model
     {
         // Set nilai default untuk kolom yang diinginkan sebelum model disimpan
         static::creating(function ($model) {
-            $model->telp = '';
-            $model->nik = '';
-            $model->tanggallahir = date('Y-m-d');
-            $model->jeniskelamin = 'laki-laki';
-            $model->alamat = '';
-            $model->nip = '';
-            $model->keahlian1 = '';
-            $model->keahlian2 = '';
-            $model->kantor = '';
+            $model->setDefaults();
         });
+    }
+    public function setDefaults()
+    {
+        $this->attributes['telp'] = $this->attributes['telp'] ?? '';
+        $this->attributes['nik'] = $this->attributes['nik'] ?? '';
+        $this->attributes['tanggallahir'] = $this->attributes['tanggallahir'] ?? date('Y-m-d');
+        $this->attributes['jeniskelamin'] = $this->attributes['jeniskelamin'] ?? 'laki-laki';
+        $this->attributes['alamat'] = $this->attributes['alamat'] ?? '';
+        $this->attributes['nip'] = $this->attributes['nip'] ?? '';
+        $this->attributes['keahlian1'] = $this->attributes['keahlian1'] ?? '';
+        $this->attributes['keahlian2'] = $this->attributes['keahlian2'] ?? '';
+        $this->attributes['kantor'] = $this->attributes['kantor'] ?? '';
     }
 }
