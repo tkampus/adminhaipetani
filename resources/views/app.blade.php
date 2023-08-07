@@ -81,8 +81,8 @@
             <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header">Custom Admin:</h6>
-                  <a class="collapse-item" href="">Table Admin</a>
-                  <a class="collapse-item" href="cards.html">New Admin</a>
+                  <a class="collapse-item" href="{{route('readadmin')}}">Table Admin</a>
+                  <a class="collapse-item" href="{{route('createadmin')}}">New Admin</a>
                </div>
             </div>
          </li>

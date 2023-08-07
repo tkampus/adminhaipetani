@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ADMIN\admincontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ADMIN\appController;
 use App\Http\Controllers\ADMIN\akunController;
@@ -18,12 +19,12 @@ use App\Http\Controllers\ADMIN\akunController;
 // login
 Route::get('/login', [appController::class, 'login'])->name('login');
 Route::post('/actionlogin', [appController::class, 'actionlogin'])->name('actionlogin');
+//logout
 Route::get('/logout', [appController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // dasboard
     Route::get('/', [appController::class, 'dasboard'])->name('dasboard');
-    //logout
 
     // create akun
     Route::get('/Buat_Akun', [akunController::class, 'createakun'])->name('createakun');
@@ -35,9 +36,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // delete akun
     Route::post('/Hapus_Akun', [akunController::class, 'deleteakun'])->name('deleteakun');
     // update akun
-    Route::post('/Update_Akun', function () {
-        return 'hai';
-    })->name('updateakun');
     Route::post('/Update_Akun', [akunController::class, 'updateakun'])->name('updateakun');
     // detail akun
     Route::get('/Detail:{id}', [akunController::class, 'detailakun'])->name('detailakun');
@@ -45,8 +43,18 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/Reset_Password', [akunController::class, 'gantipasswordakun'])->name('gantipasswordakun');
 
     // read admin
-    // delete admin
+    Route::get('/Daftar_Admin', [admincontroller::class, 'readadmin'])->name('readadmin');
+    // create admin
+    Route::get('/Buat_Admin', [admincontroller::class, 'createadmin'])->name('createadmin');
+    // action create admin
+    Route::post('/Buat_Admin', [admincontroller::class, 'actioncreateadmin'])->name('actioncreateadmin');
+    // detail admin
+    Route::get('/Detail_Admin:{id}', [adminController::class, 'detailadmin'])->name('detailadmin');
     // update admin
+    Route::post('/Update_Admin', [admincontroller::class, 'updateadmin'])->name('updateadmin');
+    // reset password
+    // delete admin
+    Route::post('/Hapus_Admin', [admincontroller::class, 'deleteadmin'])->name('deleteadmin');
 
     // create faq
     // read faq

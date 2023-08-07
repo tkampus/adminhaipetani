@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class akuncontroller extends Controller
 {
-    // read akun
+    // read akun ================================================================================
     public function readakun()
     {
         // get data
@@ -29,7 +29,7 @@ class akuncontroller extends Controller
         return view('akun.readakun', ['user' => $user, 'akun' => $akun]);
     }
 
-    // create akun
+    // create akun ================================================================================
     public function createakun()
     {
         // get data
@@ -81,7 +81,7 @@ class akuncontroller extends Controller
         return back();
     }
 
-    // read ahli
+    // read ahli ================================================================================
     public function readahli()
     {
         // get data
@@ -95,7 +95,7 @@ class akuncontroller extends Controller
         return view('akun.readahli', ['user' => $user, 'akun' => $ahli]);
     }
 
-    // read petani
+    // read petani ================================================================================
     public function readpetani()
     {
         // get data
@@ -108,7 +108,7 @@ class akuncontroller extends Controller
 
         return view('akun.readpetani', ['user' => $user, 'akun' => $petani]);
     }
-    // detail akun
+    // detail akun ================================================================================
     public function detailakun($id)
     {
         // get data
@@ -163,7 +163,7 @@ class akuncontroller extends Controller
             'back' => $backurl
         ]);
     }
-    // update akun
+    // update akun ================================================================================
     public function updateakun(Request $req)
     {
         // get data
@@ -232,9 +232,8 @@ class akuncontroller extends Controller
         }
         Session::flash('success', ['Update Account' => 'Berhasil mengipdate akun:' . $input['email']]);
         return back();
-        return var_dump($input);
     }
-    // ganti passsword
+    // ganti passsword ================================================================================
     public function gantipasswordakun(Request $req)
     {
         $input = $req->all();
@@ -245,8 +244,6 @@ class akuncontroller extends Controller
             'c-password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            // return var_dump($validator->errors());
-            // return $validator->errors()->toArray();
             Session::flash('error', $validator->errors()->toArray());
             return back();
         }
@@ -266,7 +263,7 @@ class akuncontroller extends Controller
         return back();
     }
 
-    // delete akun
+    // delete akun ================================================================================
     public function deleteakun(Request $req)
     {
         $userToDelete = User::find($req->id);

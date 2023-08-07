@@ -129,7 +129,7 @@
             </div>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                <div class="card-body">
-                  <input type="hidden" name="email" class="form-control" id="inputPassword4" placeholder="Password" required value="{{$data['email']}}">
+                  <input type="hidden" name="email" class="form-control" id="inputPassword40" placeholder="Password" required value="{{$data['email']}}">
                   <div class="form-group">
                      <label for="inputPassword4">Password Sebelumnya</label>
                      <input type="password" name="l-password" class="form-control" id="inputPassword4" placeholder="Password" required value="123">
