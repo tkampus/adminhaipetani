@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\ADMIN;
 
+use App\Models\chat;
+use App\Models\user;
+use App\Models\u_ahli;
 use App\Models\masukan;
+use App\Models\u_petani;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Models\chat;
 
 class appController extends Controller
 {
@@ -20,9 +25,19 @@ class appController extends Controller
             'email' => Auth::user()->email,
             'role' => Auth::user()->role
         ];
-        // var_dump($datas);
+        $loginnow =
+            DB::table('personal_access_tokens')
+            ->whereDate('last_used_at', Carbon::today())
+            ->count();
+        $data = [
+            'admin' => User::where('role', 'admin')->count(), // berisikan jumlah user denagnb role admin
+            'ahli' => u_ahli::count(), //berisikan jumlah user yang ada dalam tabel u_ahli
+            'petani' => u_petani::count(), //berisikan jumlah user yang ada dalam tabel u_petani
+            'chatnow' => chat::whereDate('created_at', today())->count(), // berisikan jumlah user yang melakuka chat hari ini
+            'loginnow' => $loginnow
+        ];
         // view
-        return view('app.dasboard', ['user' => $user]);
+        return view('app.dasboard', ['user' => $user, 'data' => $data]);
     }
     // login
     public function login()
@@ -75,6 +90,6 @@ class appController extends Controller
             'email' => Auth::user()->email,
             'role' => Auth::user()->role
         ];
-        return view('app.logactivity', ['user' => $user]);
+        return view('app.error', ['user' => $user]);
     }
 }

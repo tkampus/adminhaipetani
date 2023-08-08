@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Masukan')
+@section('title', 'Daftar Petani')
 
 @section('link')
 <!-- Custom styles for this page -->

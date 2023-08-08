@@ -5,6 +5,7 @@ use App\Http\Controllers\ADMIN\faqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ADMIN\appController;
 use App\Http\Controllers\ADMIN\akunController;
+use App\Http\Controllers\ADMIN\eventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,8 +73,17 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // read masukan
     Route::get('/masukan', [appController::class, 'readmasukan'])->name('readmasukan');
 
-    // create event
     // read event
+    Route::get('/Daftar_Event', [eventcontroller::class, 'readevent'])->name('readevent');
+    // create event
+    Route::get('/Buat_Event', [eventcontroller::class, 'createevent'])->name('createevent');
+    Route::post('/Buat_Event', [eventcontroller::class, 'actioncreateevent'])->name('actioncreateevent');
+    // delete event
+    Route::post('/Hapus_Event', [eventcontroller::class, 'deleteevent'])->name('deleteevent');
+    // detail event
+    Route::get('/Detail_Event:{id}', [eventcontroller::class, 'detailevent'])->name('detailevent');
+    // update event
+    Route::post('/Update_Event', [eventcontroller::class, 'updateevent'])->name('updateevent');
 
     // read activity
     Route::get('/user_activity', [appController::class, 'readactivity'])->name('readactivity');

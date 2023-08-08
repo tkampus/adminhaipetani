@@ -31,6 +31,7 @@ class datasampel extends Seeder
             ['email' => 'user8@gmail.com', 'username' => 'user8', 'password' => bcrypt('password8'), 'role' => 'ahli', 'remember_token' => 'token_' . Str::random(15),],
             ['email' => 'user9@gmail.com', 'username' => 'user9', 'password' => bcrypt('password9'), 'role' => 'ahli', 'remember_token' => 'token_' . Str::random(15),],
             ['email' => 'tasim@gmail.com', 'username' => 'tasim', 'password' => bcrypt('123'), 'role' => 'admin', 'remember_token' => 'token_' . Str::random(15),],
+            ['email' => 'superadmin@haipetani.com', 'username' => 'Super Admin', 'password' => bcrypt('123'), 'role' => 'admin', 'remember_token' => 'token_' . Str::random(15),],
         ];
         $pesan = [
             [

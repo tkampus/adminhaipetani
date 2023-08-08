@@ -39,7 +39,7 @@ class akuncontroller extends Controller
             'role' => Auth::user()->role
         ];
 
-        return view('akun.tambah', ['user' => $user]);
+        return view('akun.create', ['user' => $user]);
     }
 
     public function actioncreateakun(Request $req)
@@ -157,7 +157,7 @@ class akuncontroller extends Controller
                 $data = $petaniData;
             }
         }
-        return view('akun.detailakun', [
+        return view('akun.detail', [
             'user' => $user,
             'data' => $data,
             'back' => $backurl
