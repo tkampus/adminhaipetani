@@ -95,8 +95,8 @@
             <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header">Custom FAQ:</h6>
-                  <a class="collapse-item" href="buttons.html">Table FAQ</a>
-                  <a class="collapse-item" href="cards.html">New FAQ</a>
+                  <a class="collapse-item" href="{{route('readfaq')}}">Table FAQ</a>
+                  <a class="collapse-item" href="{{route('createfaq')}}">New FAQ</a>
                </div>
             </div>
          </li>

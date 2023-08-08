@@ -14,7 +14,7 @@
    <form method="post" action="{{route('actioncreateadmin')}}">
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-         <h1 class="h3 mb-2 text-gray-800">Buat Akun</h1>
+         <h1 class="h3 mb-2 text-gray-800">Buat Akun Admin</h1>
          <button type="submit" class=" btn btn-primary">Daftarkan Akun</button>
       </div>
       <!-- DataTales Example -->

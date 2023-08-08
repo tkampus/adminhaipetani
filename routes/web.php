@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ADMIN\admincontroller;
+use App\Http\Controllers\ADMIN\faqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ADMIN\appController;
 use App\Http\Controllers\ADMIN\akunController;
@@ -56,10 +57,17 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // delete admin
     Route::post('/Hapus_Admin', [admincontroller::class, 'deleteadmin'])->name('deleteadmin');
 
-    // create faq
     // read faq
+    Route::get('/Daftar_FAQ', [faqcontroller::class, 'readfaq'])->name('readfaq');
+    // create faq
+    Route::get('/Buat_FAQ', [faqcontroller::class, 'createfaq'])->name('createfaq');
+    Route::post('/Buat_FAQ', [faqcontroller::class, 'actioncreatefaq'])->name('actioncreatefaq');
     // delete faq
+    Route::post('/Hapus_FAQ', [faqcontroller::class, 'deletefaq'])->name('deletefaq');
+    // detail faq
+    Route::get('/Detail_FAQ:{id}', [faqcontroller::class, 'detailfaq'])->name('detailfaq');
     // update faq
+    Route::post('/Update_FAQ', [faqcontroller::class, 'updatefaq'])->name('updatefaq');
 
     // read masukan
     Route::get('/masukan', [appController::class, 'readmasukan'])->name('readmasukan');
