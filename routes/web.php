@@ -84,6 +84,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/Detail_Event:{id}', [eventcontroller::class, 'detailevent'])->name('detailevent');
     // update event
     Route::post('/Update_Event', [eventcontroller::class, 'updateevent'])->name('updateevent');
+    Route::get('/Update_Event:{id}', [eventcontroller::class, 'updateeventactive'])->name('updateeventactive');
+    // image Event
+    Route::get('/Image_Event:{id}', [eventcontroller::class, 'getImage'])->name('getimage');
 
     // read activity
     Route::get('/user_activity', [appController::class, 'readactivity'])->name('readactivity');

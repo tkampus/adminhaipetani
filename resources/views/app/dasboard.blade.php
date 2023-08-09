@@ -17,9 +17,10 @@
     <div class="row">
 
         <!-- Area Chart -->
-        <div class="col-xl-9 col-lg-8 container-fluid">
-            <h1>Selamat datang di Dashboard</h1>
+        <div class="col-xl-9 col-lg-8 container-fluid mb-3">
+            <h1>Selamat datang di AdminHaiPetani</h1>
             <p class="lead">Mari bersama-sama menjelajahi informasi terbaru dan mengelola aktivitas Anda di platform kami.</p>
+            <hr class="my-4">
             <p>Jangan ragu untuk menggunakan menu dan fitur yang tersedia untuk menjalankan tugas Anda dengan lebih efisien dan efektif.</p>
             <a href="{{route('readakun')}}" class="btn btn-primary">Mulai Sekarang</a>
         </div>

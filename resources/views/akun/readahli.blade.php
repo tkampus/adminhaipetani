@@ -29,6 +29,7 @@
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                <thead>
                   <tr>
+                     <th>No. </th>
                      <th>Username</th>
                      <th>Email</th>
                      <th>Telp</th>
@@ -46,6 +47,7 @@
                </thead>
                <tfoot>
                   <tr>
+                     <th>No. </th>
                      <th>Username</th>
                      <th>Email</th>
                      <th>Telp</th>
@@ -62,8 +64,9 @@
                   </tr>
                </tfoot>
                <tbody>
-                  @foreach($akun as $item)
+                  @foreach($akun as $key => $item)
                   <tr>
+                     <td>{{ $key + 1 }}</td>
                      <td>{{$item->username}}</td>
                      <td>{{$item->email}}</td>
                      <td>{{$item->telp}}</td>

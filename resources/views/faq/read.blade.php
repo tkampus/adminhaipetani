@@ -28,6 +28,7 @@
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                <thead>
                   <tr>
+                     <th>No</th>
                      <th>Judul</th>
                      <th>Kategori</th>
                      <th>Ciri - ciri</th>
@@ -38,6 +39,7 @@
                </thead>
                <tfoot>
                   <tr>
+                     <th>No</th>
                      <th>Judul</th>
                      <th>Kategori</th>
                      <th>Ciri - ciri</th>
@@ -47,8 +49,9 @@
                   </tr>
                </tfoot>
                <tbody>
-                  @foreach($faq as $item)
+                  @foreach($faq as $key => $item)
                   <tr>
+                     <td>{{ $key + 1 }}</td>
                      <td>{{$item->judul}}</td>
                      <td>{{$item->kategori}}</td>
                      <td>{{$item->ciri2}}</td>

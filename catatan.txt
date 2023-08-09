@@ -9,3 +9,8 @@
 4. membuat route
 4. membuat controller
 5. membuat views
+6. instal quill editor
+
+
+// solusi
+   php artisan serve --port=3000
