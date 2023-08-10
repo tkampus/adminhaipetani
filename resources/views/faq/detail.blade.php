@@ -5,6 +5,9 @@
 @section('link')
 <!-- Custom styles for this page -->
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<!-- Tambahkan Quill CSS -->
+<!-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> -->
+<link href="vendor/quill/css/cdn.quilljs.com.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -44,11 +47,13 @@
             </div>
             <div class="form-group">
                <label for="inputciri2">Ciri - ciri</label>
-               <input type="text" name="ciri2" class="form-control" id="inputciri2" placeholder="Ciri-ciri : " required value="{{$data->ciri2}}">
+               <input type="text" name="ciri2" class="form-control d-none" id="inputciri2" placeholder="Ciri-ciri : " required value="{{$data->ciri2}}">
+               <div id="editorciri2"></div>
             </div>
             <div class="form-group">
                <label for="inputsolusi">Solusi</label>
-               <input type="text" name="solusi" class="form-control" id="inputsolusi" placeholder="Solusi : " required value="{{$data->solusi}}">
+               <input type="text" name="solusi" class="form-control d-none" id="inputsolusi" placeholder="Solusi : " required value="{{$data->solusi}}">
+               <div id="editorsolusi"></div>
             </div>
          </div>
       </div>
@@ -60,7 +65,32 @@
 
 @section('script')
 
+
+<!-- Tambahkan Quill Script -->
+<!-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> -->
+<script src="vendor/quill/js/cdn.quilljs.com.js"></script>
 <!-- Page level custom scripts -->
 <script src="js/demo/form-account.js"></script>
 <!-- script -->
+<script>
+   var quill1 = new Quill('#editorsolusi', {
+      theme: 'snow'
+   });
+   var quill2 = new Quill('#editorciri2', {
+      theme: 'snow'
+   });
+   var input1 = document.querySelector('#inputsolusi');
+   var input2 = document.querySelector('#inputciri2');
+
+   // ubah isi editor conten
+   quill1.root.innerHTML = input1.value;
+   quill2.root.innerHTML = input2.value;
+   // ketika form di submit
+   document.querySelector('form').addEventListener('submit', function(e) {
+      var editorContent1 = quill1.root.innerHTML;
+      var editorContent2 = quill2.root.innerHTML;
+      input1.value = editorContent1;
+      input2.value = editorContent2;
+   });
+</script>
 @endsection

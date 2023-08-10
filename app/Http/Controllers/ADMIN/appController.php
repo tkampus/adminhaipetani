@@ -92,4 +92,11 @@ class appController extends Controller
         ];
         return view('app.error', ['user' => $user]);
     }
+
+    // function testing
+    public function tespost(Request $req)
+    {
+        return var_dump($req->all());
+        return $req->all();
+    }
 }

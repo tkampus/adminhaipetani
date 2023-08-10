@@ -45,6 +45,7 @@
                      <th>Content</th>
                      <th>link</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </thead>
@@ -56,6 +57,7 @@
                      <th>Content</th>
                      <th>link</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </tfoot>
@@ -76,6 +78,7 @@
                      <td>{{ $item->conten }}</td>
                      <td>{{ $item->link }}</td>
                      <td>{{ $item->created_at }}</td>
+                     <td>{{$item->updated_at}}</td>
                      <td>
                         <a href="/Detail_Event:{{ $item->id }}" class="btn btn-info btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Detail : {{ $item->judul }}">
                            <i class="fas fa-info-circle"></i>
@@ -130,7 +133,7 @@
             </button>
          </div>
          <div class="modal-body">
-            <img class="event-gambar-max" src="{{ route('getimage', $item->id) }}" alt="">
+            <img class="event-gambar-max" src="{{ route('getimage', '0') }}" alt="">
          </div>
       </div>
    </div>

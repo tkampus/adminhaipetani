@@ -84,6 +84,10 @@ class eventController extends Controller
         if (!$event) {
             return redirect()->back()->with('error', ['error' => 'Event dengan ID tersebut tidak ditemukan.']);
         }
+
+        $active = false; // Defaultnya tidak aktif
+        $latestEvent = Event::latest('id')->first();
+
         $backurl = [
             'url' => url()->previous(),
             'title' => ucwords(str_replace('_', ' ', basename(parse_url(url()->previous(), PHP_URL_PATH))))
@@ -98,7 +102,8 @@ class eventController extends Controller
         return view('event.detail', [
             'user' => $user,
             'data' => $event,
-            'back' => $backurl
+            'back' => $backurl,
+            'active' => $active
         ]);
     }
     // update event

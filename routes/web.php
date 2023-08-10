@@ -25,6 +25,9 @@ Route::post('/actionlogin', [appController::class, 'actionlogin'])->name('action
 Route::get('/logout', [appController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    // tes
+    Route::post('/tespost', [appController::class, 'tespost'])->name('tespost');
+
     // dasboard
     Route::get('/', [appController::class, 'dasboard'])->name('dasboard');
 

@@ -5,6 +5,20 @@
 @section('link')
 <!-- Custom styles for this page -->
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> -->
+<link href="vendor/quill/css/cdn.quilljs.com.css" rel="stylesheet">
+<style>
+   .tabel-kolom-text {
+      display: block;
+      max-width: 30rem;
+      width: max-content;
+      max-height: 10rem;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      white-space: normal;
+      word-wrap: break-word;
+   }
+</style>
 @endsection
 
 @section('content')
@@ -34,6 +48,7 @@
                      <th>Ciri - ciri</th>
                      <th>Solusi</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </thead>
@@ -45,6 +60,7 @@
                      <th>Ciri - ciri</th>
                      <th>Solusi</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </tfoot>
@@ -53,10 +69,11 @@
                   <tr>
                      <td>{{ $key + 1 }}</td>
                      <td>{{$item->judul}}</td>
+                     <td class="tabel-kolom-text">{!! $item->ciri2 !!}</td>
                      <td>{{$item->kategori}}</td>
-                     <td>{{$item->ciri2}}</td>
-                     <td>{{$item->solusi}}</td>
+                     <td class="tabel-kolom-text">{!! $item->solusi !!}</td>
                      <td>{{$item->created_at}}</td>
+                     <td>{{$item->updated_at}}</td>
                      <td>
                         <a href="/Detail_FAQ:{{$item->id}}" class="btn btn-info btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Detail : {{$item->judul}}">
                            <i class="fas fa-info-circle"></i>

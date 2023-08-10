@@ -27,14 +27,19 @@
          </h2>
          <div>
             <button type="submit" class="mb-2 btn btn-primary">Update Event</button>
+            @if($active)
             <a href="{{route('updateeventactive', ['id' => $data->id])}}" class="mb-2 btn btn-info">Jadikan Active</a>
+            @endif
          </div>
       </div>
       <!-- DataTales Example -->
       <div class="card shadow mb-4">
          <input type="hidden" name="id" value="{{$data->id}}">
-         <div class="card-header py-3">
+         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Event</h6>
+            @if(!$active)
+            <span class="badge badge-success">Active</span>
+            @endif
          </div>
          <div class="card-body">
             <input type="hidden" name="id" value="{{$data->id}}">

@@ -37,6 +37,7 @@
                      <th>Tanggal Lahir</th>
                      <th>Alamat</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </thead>
@@ -51,6 +52,7 @@
                      <th>Tanggal Lahir</th>
                      <th>Alamat</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </tfoot>
@@ -66,6 +68,7 @@
                      <td>{{$item->tanggallahir}}</td>
                      <td>{{$item->alamat}}</td>
                      <td>{{$item->created_at}}</td>
+                     <td>{{$item->updated_at}}</td>
                      <td>
                         <a href="/Detail:{{$item->id}}" class="btn btn-info btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Detail : {{$item->username}}">
                            <i class="fas fa-info-circle"></i>

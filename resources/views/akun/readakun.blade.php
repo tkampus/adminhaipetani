@@ -33,6 +33,7 @@
                      <th>Email</th>
                      <th>Role</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </thead>
@@ -43,6 +44,7 @@
                      <th>Email</th>
                      <th>Role</th>
                      <th>Created At</th>
+                     <th>Updated At</th>
                      <th>Action</th>
                   </tr>
                </tfoot>
@@ -56,6 +58,7 @@
                         <a href="{{route('read'.$item->role)}}">{{$item->role}}</a>
                      </td>
                      <td>{{$item->created_at}}</td>
+                     <td>{{$item->updated_at}}</td>
                      <td>
                         <a href="/Detail:{{$item->id}}" class="btn btn-info btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Detail : {{$item->username}}">
                            <i class="fas fa-info-circle"></i>
