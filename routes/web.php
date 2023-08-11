@@ -23,6 +23,8 @@ Route::get('/login', [appController::class, 'login'])->name('login');
 Route::post('/actionlogin', [appController::class, 'actionlogin'])->name('actionlogin');
 //logout
 Route::get('/logout', [appController::class, 'logout'])->name('logout');
+// image Event
+Route::get('/Image_Event:{id}', [eventcontroller::class, 'getImage'])->name('getimage');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // tes
@@ -88,8 +90,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     // update event
     Route::post('/Update_Event', [eventcontroller::class, 'updateevent'])->name('updateevent');
     Route::get('/Update_Event:{id}', [eventcontroller::class, 'updateeventactive'])->name('updateeventactive');
-    // image Event
-    Route::get('/Image_Event:{id}', [eventcontroller::class, 'getImage'])->name('getimage');
 
     // read activity
     Route::get('/user_activity', [appController::class, 'readactivity'])->name('readactivity');
