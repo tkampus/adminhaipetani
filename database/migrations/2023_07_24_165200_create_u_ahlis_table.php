@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('u_ahlis', function (Blueprint $table) {
             // $table->id();
-            $table->string('email')->unique();
-            $table->string('telp');
+            $table->string('nohp')->unique();
+            $table->string('email');
             $table->string('nik');
             $table->string('jeniskelamin');
             $table->date('tanggallahir');
             $table->string('alamat');
             // ahli
             $table->string('nip');
+            $table->float('bintang', 2, 1);
             $table->string('keahlian1');
             $table->string('keahlian2');
             $table->string('kantor');

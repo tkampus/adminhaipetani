@@ -9,9 +9,8 @@ class u_petani extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
+        'nohp',
         'email',
-        'telp',
         'nik',
         'jeniskelamin',
         'tanggallahir',
@@ -21,15 +20,11 @@ class u_petani extends Model
     {
         // Set nilai default untuk kolom yang diinginkan sebelum model disimpan
         static::creating(function ($model) {
-            $model->setDefaults();
+            $model->email = '';
+            $model->nik = '';
+            $model->tanggallahir = date('Y-m-d');
+            $model->jeniskelamin = 'laki-laki';
+            $model->alamat = '';
         });
-    }
-    public function setDefaults()
-    {
-        $this->attributes['telp'] = $this->attributes['telp'] ?? '';
-        $this->attributes['nik'] = $this->attributes['nik'] ?? '';
-        $this->attributes['tanggallahir'] = $this->attributes['tanggallahir'] ?? date('Y-m-d');
-        $this->attributes['jeniskelamin'] = $this->attributes['jeniskelamin'] ?? 'laki-laki';
-        $this->attributes['alamat'] = $this->attributes['alamat'] ?? '';
     }
 }

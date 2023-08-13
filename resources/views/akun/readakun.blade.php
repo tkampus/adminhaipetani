@@ -30,7 +30,7 @@
                   <tr>
                      <th>No.</th>
                      <th>Username</th>
-                     <th>Email</th>
+                     <th>No Hp</th>
                      <th>Role</th>
                      <th>Created At</th>
                      <th>Updated At</th>
@@ -41,7 +41,7 @@
                   <tr>
                      <th>No.</th>
                      <th>Username</th>
-                     <th>Email</th>
+                     <th>No Hp</th>
                      <th>Role</th>
                      <th>Created At</th>
                      <th>Updated At</th>
@@ -53,7 +53,7 @@
                   <tr>
                      <td>{{ $key + 1 }}</td>
                      <td>{{$item->username}}</td>
-                     <td>{{$item->email}}</td>
+                     <td>{{$item->nohp}}</td>
                      <td>
                         <a href="{{route('read'.$item->role)}}">{{$item->role}}</a>
                      </td>
@@ -63,7 +63,7 @@
                         <a href="/Detail:{{$item->id}}" class="btn btn-info btn-circle btn-sm" data-toggle="tooltip" data-placement="top" title="Detail : {{$item->username}}">
                            <i class="fas fa-info-circle"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-circle btn-sm btn-delete" data-id="{{$item->id}}" data-toggle="modal" title="Hapus : {{$item->username}}" data-target="#staticBackdrop" data-toggle="tooltip" data-placement="top" data-username="{{$item->username}}" data-email="{{$item->email}}">
+                        <a href="#" class="btn btn-danger btn-circle btn-sm btn-delete" data-id="{{$item->id}}" data-toggle="modal" title="Hapus : {{$item->username}}" data-target="#staticBackdrop" data-toggle="tooltip" data-placement="top" data-username="{{$item->username}}" data-email="{{$item->nohp}}">
                            <i class="fas fa-trash"></i>
                         </a>
                      </td>

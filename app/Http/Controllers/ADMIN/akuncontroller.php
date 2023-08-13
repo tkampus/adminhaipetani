@@ -47,10 +47,18 @@ class akuncontroller extends Controller
         $input = $req->all();
         // validasi data
         $validator = Validator::make($req->all(), [
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'c-password' => 'required|same:password',
-            'role' => 'required|in:petani,ahli',
+            'nohp' => 'required|string|regex:/^\d{10,12}$/|unique:users,nohp',
+            'username' => 'required|string',
+            'email' => 'nullable|email',
+            'nik' => 'nullable',
+            'jeniskelamin' => 'required|string|in:laki-laki,perempuan',
+            'tanggallahir' => 'nullable',
+            'alamat' => 'nullable',
+            'bintang' => 'nullable',
+            'nip' => 'nullable',
+            'keahlian1' => 'nullable|string',
+            'keahlian2' => 'nullable|string',
+            'kantor' => 'nullable',
         ]);
         if ($validator->fails()) {
             // return var_dump($validator->errors());
@@ -90,7 +98,7 @@ class akuncontroller extends Controller
             'email' => Auth::user()->email,
             'role' => Auth::user()->role
         ];
-        $ahli = u_ahli::join('users', 'u_ahlis.email', '=', 'users.email')->get();
+        $ahli = u_ahli::join('users', 'u_ahlis.nohp', '=', 'users.nohp')->get();
 
         return view('akun.readahli', ['user' => $user, 'akun' => $ahli]);
     }
@@ -104,7 +112,7 @@ class akuncontroller extends Controller
             'email' => Auth::user()->email,
             'role' => Auth::user()->role
         ];
-        $petani = u_petani::join('users', 'u_petanis.email', '=', 'users.email')->get();
+        $petani = u_petani::join('users', 'u_petanis.nohp', '=', 'users.nohp')->get();
 
         return view('akun.readpetani', ['user' => $user, 'akun' => $petani]);
     }
@@ -137,8 +145,8 @@ class akuncontroller extends Controller
 
         // Cek jika user berperan sebagai "ahli"
         if ($data->role === 'ahli') {
-            $ahliData = u_ahli::join('users', 'u_ahlis.email', '=', 'users.email')
-                ->where('users.email', $data->email)
+            $ahliData = u_ahli::join('users', 'u_ahlis.nohp', '=', 'users.nohp')
+                ->where('users.nohp', $data->nohp)
                 ->select('users.username', 'users.role', 'u_ahlis.*')
                 ->first();
 
@@ -148,8 +156,8 @@ class akuncontroller extends Controller
         }
         // Cek jika user berperan sebagai "petani"
         if ($data->role === 'petani') {
-            $petaniData = u_petani::join('users', 'u_petanis.email', '=', 'users.email')
-                ->where('users.email', $data->email)
+            $petaniData = u_petani::join('users', 'u_petanis.nohp', '=', 'users.nohp')
+                ->where('users.nohp', $data->nohp)
                 ->select('users.username', 'users.role', 'u_petanis.*')
                 ->first();
 
@@ -178,13 +186,14 @@ class akuncontroller extends Controller
             unset($input['role']);
         }
         $validator = Validator::make($input, [
-            'email' => 'required|string|email',
+            'nohp' => 'required|string|regex:/^\d{10,12}$/',
             'username' => 'required|string',
-            'telp' => 'nullable',
+            'email' => 'nullable|email',
             'nik' => 'nullable',
             'jeniskelamin' => 'required|string|in:laki-laki,perempuan',
             'tanggallahir' => 'nullable',
             'alamat' => 'nullable',
+            'bintang' => 'nullable',
             'nip' => 'nullable',
             'keahlian1' => 'nullable|string',
             'keahlian2' => 'nullable|string',
@@ -195,7 +204,7 @@ class akuncontroller extends Controller
             Session::flash('error', $validator->errors()->toArray());
             return back();
         }
-        $user = User::where('email', $input['email'])->first();
+        $user = User::where('nohp', $input['nohp'])->first();
         if ($user) {
             // Update data di model User
             $user->update([
@@ -204,8 +213,8 @@ class akuncontroller extends Controller
 
             // Cek role dan update data di model yang sesuai
             if ($user->role === 'petani') {
-                $uPetani = u_petani::where('email', $input['email'])->update([
-                    'telp' => $input['telp'] ?? '',
+                $uPetani = u_petani::where('nohp', $input['nohp'])->update([
+                    'email' => $input['email'] ?? '',
                     'nik' => $input['nik'] ?? '',
                     'jeniskelamin' => $input['jeniskelamin'] ?? 'laki-laki',
                     'tanggallahir' => $input['tanggallahir'] ?? date('Y-m-d'),
@@ -213,12 +222,13 @@ class akuncontroller extends Controller
                 ]);
                 // return $uPetani;
             } elseif ($user->role === 'ahli') {
-                $uAhli = u_ahli::where('email', $input['email'])->update([
-                    'telp' => $input['telp'] ?? '',
+                $uAhli = u_ahli::where('nohp', $input['nohp'])->update([
+                    'email' => $input['email'] ?? '',
                     'nik' => $input['nik'] ?? '',
                     'jeniskelamin' => $input['jeniskelamin'] ?? 'laki-laki',
                     'tanggallahir' => $input['tanggallahir'] ?? date('Y-m-d'),
                     'alamat' => $input['alamat'] ?? '',
+                    'bintang' => $input['bintang'] ?? '',
                     'nip' => $input['nip'] ?? '',
                     'keahlian1' => $input['keahlian1'] ?? '',
                     'keahlian2' => $input['keahlian2'] ?? '',
@@ -230,7 +240,7 @@ class akuncontroller extends Controller
             Session::flash('error', ['error' => 'Email tidak ditemukan!']);
             return back();
         }
-        Session::flash('success', ['Update Account' => 'Berhasil mengipdate akun:' . $input['email']]);
+        Session::flash('success', ['Update Account' => 'Berhasil mengupdate akun:' . $input['nohp']]);
         return back();
     }
     // ganti passsword ================================================================================
@@ -239,7 +249,7 @@ class akuncontroller extends Controller
         $input = $req->all();
         $validator = Validator::make($req->all(), [
             'l-password' => 'required',
-            'email' => 'required|email|exists:users,email',
+            'nohp' => 'required|regex:/^\d{10,12}$/|exists:users,nohp',
             'password' => 'required',
             'c-password' => 'required|same:password',
         ]);
@@ -249,7 +259,7 @@ class akuncontroller extends Controller
         }
         // return $input;
         // Logika untuk memeriksa apakah l-password benar
-        $user = User::where('email', $req->email)->first();
+        $user = User::where('nohp', $req->nohp)->first();
         if (!Hash::check($req->input('l-password'), $user->password)) {
             Session::flash('error', ['l-password' => 'Password lama salah.']);
             return back()->withErrors(['l-password' => 'Password lama salah.'])->withInput();
@@ -259,7 +269,7 @@ class akuncontroller extends Controller
         $user->password = Hash::make($req->input('password'));
         $user->save();
 
-        Session::flash('success', 'Password berhasil diubah.');
+        Session::flash('success', ['change password' => 'Password berhasil diubah.']);
         return back();
     }
 

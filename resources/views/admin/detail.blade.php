@@ -29,7 +29,7 @@
          <div class="card-body">
             <div class="form-group">
                <label for="inputEmail4">Email</label>
-               <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required value="{{$data['email']}}" readonly>
+               <input type="email" name="nohp" class="form-control" id="inputEmail4" placeholder="Email" required value="{{$data['email']}}" readonly>
             </div>
             <div class="form-group">
                <label for="inputusername">Username</label>

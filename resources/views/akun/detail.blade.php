@@ -28,8 +28,8 @@
          </div>
          <div class="card-body">
             <div class="form-group">
-               <label for="inputEmail4">Email</label>
-               <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required value="{{$data['email']}}" readonly>
+               <label for="inputEmail4">No Hp</label>
+               <input type="text" name="nohp" class="form-control" id="inputEmail4" placeholder="No Hp" required value="{{$data['nohp']}}" readonly>
             </div>
             <div class="form-group">
                <label for="inputusername">Username</label>
@@ -48,8 +48,8 @@
          </div>
          <div class="card-body">
             <div class="form-group">
-               <label for="inputtelp">No Telp</label>
-               <input type="number" name="telp" class="form-control" id="inputtelp" value="{{$data['telp']}}">
+               <label for="inputemail">Email</label>
+               <input type="email" name="email" class="form-control" id="inputemail" value="{{$data['email']}}">
             </div>
             <div class="form-group">
                <label for="inputnik">NIK</label>
@@ -79,6 +79,13 @@
                <input type="text" name="alamat" class="form-control" id="inputalamat" value="{{$data['alamat']}}">
             </div>
             @if($data['role']=='ahli')
+            <div class="form-group user-role-ahli">
+               <label for="inputbintang">Keahlian 2</label>
+               <select id="inputbintang" name="bintang" class="form-control" style="max-height: 150px; overflow-y: auto;">
+                  @for ($i = 1; $i <= 50; $i++) <option @if($data['bintang']==$i/10) selected @endif value="{{ $i/10 }}">{{ $i/10 }}</option>
+                     @endfor
+               </select>
+            </div>
             <div class="form-group user-role-ahli">
                <label for="inputnip">NIP</label>
                <input type="number" name="nip" class="form-control" id="inputnip" value="{{$data['nip']}}">
@@ -129,18 +136,18 @@
             </div>
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                <div class="card-body">
-                  <input type="hidden" name="email" class="form-control" id="inputPassword40" placeholder="Password" required value="{{$data['email']}}">
+                  <input type="hidden" name="nohp" class="form-control" id="inputPassword40" placeholder="nohp" required value="{{$data['nohp']}}">
                   <div class="form-group">
                      <label for="inputPassword4">Password Sebelumnya</label>
-                     <input type="password" name="l-password" class="form-control" id="inputPassword4" placeholder="Password" required value="123">
+                     <input type="password" name="l-password" class="form-control" id="inputPassword4" placeholder="Password" required>
                   </div>
                   <div class="form-group">
                      <label for="inputPassword41">Password Baru</label>
-                     <input type="password" name="password" class="form-control" id="inputPassword41" placeholder="Konfirmasi Password" required value="123">
+                     <input type="password" name="password" class="form-control" id="inputPassword41" placeholder="Konfirmasi Password" required>
                   </div>
                   <div class="form-group">
                      <label for="inputPassword42">Konfirmasi Password Baru</label>
-                     <input type="password" name="c-password" class="form-control" id="inputPassword42" placeholder="Konfirmasi Password" required value="123">
+                     <input type="password" name="c-password" class="form-control" id="inputPassword42" placeholder="Konfirmasi Password" required>
                   </div>
                   <button type="submit" class="float-right mb-3 btn btn-primary">Reset Password Akun</button>
                </div>

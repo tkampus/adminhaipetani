@@ -26,7 +26,7 @@
             @csrf
             <div class="form-group">
                <label for="inputEmail4">Email</label>
-               <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required value="tasim@gmail.com">
+               <input type="email" name="nohp" class="form-control" id="inputEmail4" placeholder="Email" required value="tasim@gmail.com">
             </div>
             <div class="form-group">
                <label for="inputusername">Username</label>

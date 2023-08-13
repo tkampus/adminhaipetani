@@ -22,7 +22,7 @@ class appController extends Controller
         // get data
         $user = [
             'username' => Auth::user()->username,
-            'email' => Auth::user()->email,
+            'email' => Auth::user()->nohp,
             'role' => Auth::user()->role
         ];
         $loginnow =
@@ -51,7 +51,7 @@ class appController extends Controller
     public function actionlogin(Request $req)
     {
         $data = [
-            'email' => $req->input('email'),
+            'nohp' => $req->input('email'),
             'password' => $req->input('password'),
             'role' => 'admin'
         ];

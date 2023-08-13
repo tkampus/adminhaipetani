@@ -31,7 +31,10 @@
             </div>
             <div class="form-group">
                <label for="inputgambar">Gambar</label>
-               <input type="file" name="gambar" class="form-control" accept="image/*" id="inputgambar" placeholder="gambar" required>
+               <div class="custom-file">
+                  <input type="file" name="gambar" accept="image/*" class="custom-file-input" id="inputgambar" aria-describedby="inputGroupFileAddon01" required>
+                  <label class="custom-file-label" for="inputGroupFile01" style="z-index: 0;">Choose file</label>
+               </div>
             </div>
             <div class="form-group">
                <label for="inputcontent">Content</label>

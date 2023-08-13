@@ -44,7 +44,7 @@
          <div class="card-body">
             <input type="hidden" name="id" value="{{$data->id}}">
             <div class="row">
-               <div class="col-lg-8">
+               <div class="col-8">
                   <div class="form-group">
                      <label for="inputjudul">Judul</label>
                      <input type="text" name="judul" class="form-control" id="inputjudul" placeholder="Judul : " required value="{{$data->judul}}">
@@ -54,7 +54,7 @@
                      <input type="file" name="gambar" class="form-control" accept="image/*" id="inputgambar" placeholder="gambar">
                   </div>
                </div>
-               <div class="col-lg-4 text-center border align-middle">
+               <div class="col-4 text-center border align-middle">
                   <img class="event-gambar-max" for="inputgambar" src="{{ route('getimage', ['id' => $data->id]) }}" alt="">
                </div>
             </div>

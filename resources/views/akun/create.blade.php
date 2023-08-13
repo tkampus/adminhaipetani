@@ -27,8 +27,8 @@
                <div class="card-body">
                   @csrf
                   <div class="form-group">
-                     <label for="inputEmail4">Email</label>
-                     <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required value="tasim@gmail.com">
+                     <label for="inputnohp">No Hp</label>
+                     <input type="text" name="nohp" class="form-control" id="inputnohp" placeholder="nohp" required value="085376863519">
                   </div>
                   <div class="form-group">
                      <label for="inputusername">Username</label>
@@ -61,8 +61,8 @@
                </div>
                <div class="card-body">
                   <div class="form-group">
-                     <label for="inputtelp">No Telp</label>
-                     <input type="number" name="telp" class="form-control" id="inputtelp">
+                     <label for="inputemail">Email</label>
+                     <input type="email" name="email" class="form-control" id="inputemail">
                   </div>
                   <div class="form-group">
                      <label for="inputnik">NIK</label>
@@ -84,6 +84,13 @@
                   <div class="form-group">
                      <label for="inputalamat">Alamat</label>
                      <input type="text" name="alamat" class="form-control" id="inputalamat">
+                  </div>
+                  <div class="form-group user-role-ahli">
+                     <label for="inputbintang">Bintang</label>
+                     <select id="inputbintang" name="bintang" class="form-control" style="max-height: 150px; overflow-y: auto;">
+                        @for ($i = 1; $i <= 50; $i++) <option @if($i===30) selected @endif value="{{ $i/10 }}">{{ $i/10 }}</option>
+                           @endfor
+                     </select>
                   </div>
                   <div class="form-group user-role-ahli">
                      <label for="inputnip">NIP</label>

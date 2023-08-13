@@ -43,7 +43,7 @@ class admincontroller extends Controller
         $input = $req->all();
         // validasi data
         $validator = Validator::make($req->all(), [
-            'email' => 'required|email|unique:users,email',
+            'nohp' => 'required|email|unique:users,nohp',
             'password' => 'required',
             'c-password' => 'required|same:password',
             'role' => 'required|in:admin',
@@ -101,7 +101,7 @@ class admincontroller extends Controller
         // get data
         $input = $req->all();
         $validator = Validator::make($input, [
-            'email' => 'required|email|exists:users,email',
+            'nohp' => 'required|email|exists:users,nohp',
             'username' => 'required|string',
         ]);
         if ($validator->fails()) {
