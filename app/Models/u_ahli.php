@@ -10,6 +10,7 @@ class u_ahli extends Model
     use HasFactory;
     protected $fillable = [
         'nohp',
+        'gambar',
         'email',
         'nik',
         'jeniskelamin',

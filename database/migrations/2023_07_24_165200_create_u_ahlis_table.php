@@ -15,6 +15,7 @@ return new class extends Migration
             // $table->id();
             $table->string('nohp')->unique();
             $table->string('email');
+            $table->binary('gambar')->nullable();
             $table->string('nik');
             $table->string('jeniskelamin');
             $table->date('tanggallahir');

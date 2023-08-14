@@ -11,7 +11,7 @@
 
 <!-- End of Topbar -->
 <div class="container-fluid">
-   <form method="post" action="{{route('updateakun')}}">
+   <form method="post" action="{{route('updateakun')}}" enctype="multipart/form-data">
       @csrf
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between">
@@ -34,6 +34,13 @@
             <div class="form-group">
                <label for="inputusername">Username</label>
                <input type="text" name="username" class="form-control" id="inputusername" placeholder="Username" required value="{{$data['username']}}">
+            </div>
+            <div class="form-group">
+               <label for="inputgambar">Gambar</label>
+               <div class="custom-file">
+                  <input type="file" name="gambar" accept="image/*" class="custom-file-input" id="inputgambar" aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="inputGroupFile01" style="z-index: 0;">Choose file</label>
+               </div>
             </div>
             <div class="form-group">
                <label for="inputState1">Role</label>

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('u_petanis', function (Blueprint $table) {
             $table->string('nohp')->unique();
             $table->string('email');
+            $table->binary('gambar')->nullable();
             $table->string('nik');
             $table->string('jeniskelamin');
             $table->date('tanggallahir');

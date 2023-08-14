@@ -25,6 +25,7 @@ Route::post('/actionlogin', [appController::class, 'actionlogin'])->name('action
 Route::get('/logout', [appController::class, 'logout'])->name('logout');
 // image Event
 Route::get('/Image_Event:{id}', [eventcontroller::class, 'getImage'])->name('getimage');
+Route::get('/Image_Profil:{role}:{nohp}', [akunController::class, 'getImageprofil'])->name('getimageprofil');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // tes

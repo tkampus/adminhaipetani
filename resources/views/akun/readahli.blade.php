@@ -31,6 +31,7 @@
                   <tr>
                      <th>No. </th>
                      <th>Username</th>
+                     <th>Gambar</th>
                      <th>No Hp</th>
                      <th>Email</th>
                      <th>NIK</th>
@@ -50,6 +51,7 @@
                   <tr>
                      <th>No. </th>
                      <th>Username</th>
+                     <th>Gambar</th>
                      <th>No Hp</th>
                      <th>Email</th>
                      <th>NIK</th>
@@ -70,6 +72,11 @@
                   <tr>
                      <td>{{ $key + 1 }}</td>
                      <td>{{$item->username}}</td>
+                     <td class="text-center">
+                        <a class="btn-image-event" data-toggle="modal" data-target="#modalgambar" data-id="{{ $item->id }}">
+                           <img class="event-gambar-mini" src="{{ route('getimageprofil', ['role' => 'ahli', 'nohp' => $item->nohp ]) }}" alt="">
+                        </a>
+                     </td>
                      <td>{{$item->nohp}}</td>
                      <td>{{$item->email}}</td>
                      <td>{{$item->nik}}</td>

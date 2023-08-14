@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ADMIN;
 
+use Exception;
 use App\Models\event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,12 +54,20 @@ class eventController extends Controller
         $imageData = file_get_contents($imagePath);
 
         // return $validatedData;
-        event::create([
-            'judul' => $input['judul'],
-            'gambar' => $imageData,
-            'conten' => $input['content'],
-            'link' => $input['link'],
-        ]);
+        try {
+            event::create([
+                'judul' => $input['judul'],
+                'gambar' => $imageData,
+                'conten' => $input['content'],
+                'link' => $input['link'],
+            ]);
+        } catch (Exception $e) {
+            Session::flash(
+                'error',
+                ['error' => 'Terjadi kesalahan saat menyimpan gambar']
+            );
+            return back();
+        }
         Session::flash('success', ['Create Event' => 'Berhasil membuat event baru']);
         return back();
     }

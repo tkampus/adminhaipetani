@@ -11,7 +11,7 @@
 
 <!-- End of Topbar -->
 <div class="container-fluid">
-   <form method="post" action="{{route('actioncreateakun')}}">
+   <form method="post" action="{{route('actioncreateakun')}}" enctype="multipart/form-data">
       <!-- Page Heading -->
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
          <h1 class="h3 mb-2 text-gray-800">Buat Akun</h1>
@@ -63,6 +63,13 @@
                   <div class="form-group">
                      <label for="inputemail">Email</label>
                      <input type="email" name="email" class="form-control" id="inputemail">
+                  </div>
+                  <div class="form-group">
+                     <label for="inputgambar">Gambar</label>
+                     <div class="custom-file">
+                        <input type="file" name="gambar" accept="image/*" class="custom-file-input" id="inputgambar" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01" style="z-index: 0;">Choose file</label>
+                     </div>
                   </div>
                   <div class="form-group">
                      <label for="inputnik">NIK</label>

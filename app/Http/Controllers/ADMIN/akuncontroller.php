@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ADMIN;
 
+use Exception;
 use App\Models\User;
 use App\Models\u_ahli;
 use App\Models\u_petani;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
 class akuncontroller extends Controller
@@ -49,6 +51,7 @@ class akuncontroller extends Controller
         $validator = Validator::make($req->all(), [
             'nohp' => 'required|string|regex:/^\d{10,12}$/|unique:users,nohp',
             'username' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'nullable|email',
             'nik' => 'nullable',
             'jeniskelamin' => 'required|string|in:laki-laki,perempuan',
@@ -61,9 +64,7 @@ class akuncontroller extends Controller
             'kantor' => 'nullable',
         ]);
         if ($validator->fails()) {
-            // return var_dump($validator->errors());
             Session::flash('error', $validator->errors()->toArray());
-            // return $validator->errors()->toArray();
             return back();
         }
         // cek usernmae
@@ -71,20 +72,31 @@ class akuncontroller extends Controller
             $input['username'] = 'user_' . Str::random(6);
         }
         // buat akun
-        $user = User::create($input);
-        // buat tabel data user
-        switch ($req->role) {
-            case 'petani':
-                $petani = u_petani::create($input);
-                break;
-            case 'ahli':
-                $ahli = u_ahli::create($input);
-                break;
-            default:
-                Session::flash('error', ['error' => 'Undifined Role']);
-                return back();
-                break;
+        $gambar = $req->file('gambar');
+        if ($gambar) {
+            $gambarStream = fopen($gambar->getRealPath(), 'rb');
+            $input['gambar'] = fread($gambarStream, filesize($gambar->getRealPath()));
+            fclose($gambarStream);
         }
+        // buat tabel data user
+        try {
+            switch ($req->role) {
+                case 'petani':
+                    $petani = u_petani::create($input);
+                    break;
+                case 'ahli':
+                    $ahli = u_ahli::create($input);
+                    break;
+                default:
+                    Session::flash('error', ['error' => 'Undifined Role']);
+                    return back();
+                    break;
+            }
+        } catch (Exception $e) {
+            Session::flash('error', ['error' => 'Terjadi kesalahan saat menyimpan gambar']);
+            return back();
+        }
+        $user = User::create($input);
         Session::flash('success', ['create' => 'User register successfully!']);
         return back();
     }
@@ -188,6 +200,7 @@ class akuncontroller extends Controller
         $validator = Validator::make($input, [
             'nohp' => 'required|string|regex:/^\d{10,12}$/',
             'username' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'nullable|email',
             'nik' => 'nullable',
             'jeniskelamin' => 'required|string|in:laki-laki,perempuan',
@@ -204,6 +217,7 @@ class akuncontroller extends Controller
             Session::flash('error', $validator->errors()->toArray());
             return back();
         }
+
         $user = User::where('nohp', $input['nohp'])->first();
         if ($user) {
             // Update data di model User
@@ -213,16 +227,29 @@ class akuncontroller extends Controller
 
             // Cek role dan update data di model yang sesuai
             if ($user->role === 'petani') {
-                $uPetani = u_petani::where('nohp', $input['nohp'])->update([
+                $data = [
                     'email' => $input['email'] ?? '',
                     'nik' => $input['nik'] ?? '',
                     'jeniskelamin' => $input['jeniskelamin'] ?? 'laki-laki',
                     'tanggallahir' => $input['tanggallahir'] ?? date('Y-m-d'),
                     'alamat' => $input['alamat'] ?? ''
-                ]);
+                ];
+                $gambar = $req->file('gambar');
+                if ($gambar) {
+                    $gambarStream = fopen($gambar->getRealPath(), 'rb');
+                    $data['gambar'] = fread($gambarStream, filesize($gambar->getRealPath()));
+                    fclose($gambarStream);
+                }
+                try {
+                    $uPetani = u_petani::where('nohp', $input['nohp'])->update($data);
+                } catch (Exception $e) {
+                    Session::flash('error', ['error' => 'Terjadi kesalahan saat menyimpan gambar']);
+                    return back();
+                }
+
                 // return $uPetani;
             } elseif ($user->role === 'ahli') {
-                $uAhli = u_ahli::where('nohp', $input['nohp'])->update([
+                $data = [
                     'email' => $input['email'] ?? '',
                     'nik' => $input['nik'] ?? '',
                     'jeniskelamin' => $input['jeniskelamin'] ?? 'laki-laki',
@@ -233,7 +260,19 @@ class akuncontroller extends Controller
                     'keahlian1' => $input['keahlian1'] ?? '',
                     'keahlian2' => $input['keahlian2'] ?? '',
                     'kantor' => $input['kantor'] ?? '',
-                ]);
+                ];
+                $gambar = $req->file('gambar');
+                if ($gambar) {
+                    $gambarStream = fopen($gambar->getRealPath(), 'rb');
+                    $data['gambar'] = fread($gambarStream, filesize($gambar->getRealPath()));
+                    fclose($gambarStream);
+                }
+                try {
+                    $uAhli = u_ahli::where('nohp', $input['nohp'])->update($data);
+                } catch (Exception $e) {
+                    Session::flash('error', ['error' => 'Terjadi kesalahan saat menyimpan gambar']);
+                    return back();
+                }
                 // return $uAhli;
             }
         } else {
@@ -285,5 +324,26 @@ class akuncontroller extends Controller
 
         Session::flash('success', ['User' => 'User berhasil dihapus.']);
         return back();
+    }
+    public function getImageprofil($role, $nohp)
+    {
+        switch ($role) {
+            case 'petani':
+                $data = u_petani::where('nohp', $nohp)->first();
+                break;
+            case 'ahli':
+                $data = u_ahli::where('nohp', $nohp)->first();
+                break;
+            default:
+                return 'gambar tidak ditemukan';
+                break;
+        }
+        if ($data->gambar == null) {
+            return 'belum pernah upload gambar';
+        }
+        return Response::make($data->gambar, 200, [
+            'Content-Type' => 'image/jpeg',
+            'Content-Disposition' => 'inline; filename="' . $data->judul . '.jpeg"',
+        ]);
     }
 }
